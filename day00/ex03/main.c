@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/15 15:04:40 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/15 16:04:03 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,11 @@ int	main(void)
 		{
 			if (button == false)
 			{
-				if (led == false)
-				{
-					PORTB |= 1 << PB0;
-					led = true;
-				}
-				else
-				{
-					PORTB &= ~(1 << PB0);
-					led = false;
-				}
+				// set the bit to 0
+				PORTB &= ~(1 << PB0);
+				led = !led;
+				// set the bit to new value;
+				PORTB |= (led << PB0);
 				button = true;
 			}
 		}
