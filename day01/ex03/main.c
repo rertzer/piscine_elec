@@ -6,34 +6,36 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/16 15:43:58 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/16 17:24:06 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stdbool.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
 int	main(void)
 {
-	/*
-	 * DDRB: Port B Data Direction Register
-	 * to indicate whether port B pins are read or write
-	 * 0: read
-	 * 1: write
-	 * PBx a macro for PBx offset in DDRB register
-	 */
-	DDRB |= 1 << PB0 | 1 << PB1 | 1 << PB2 | 1 << PB4;
-	PORTB &= ~(1 << PB0 | 1 << PB1 | 1 << PB2 | 1 << PB4);
+	/* set led as output */
+	DDRB |= (1 << PB1);	
 
-	/* Switch 1 is on PORT D (PD2). DDRD is output by default
-	 * setting port D to read;
-	 * */
-	//DDRD &= ~(1 << PD2);
-	bool	led = false;
-	bool	button_1 = false;
-	bool	button_2 = false;
-	int		count = 0;
+	/* TCCR: TIMER/COUNTER CONTROL REGISTER
+	 * COMAx's defines OCx behaviour: OC1A switches on TOP
+	 * WGMx defines which top value to use: 14
+	 * CSx defines the clock prescaler  clkio/1024 */
+	 
+	/* COM1A1 COM1A0 . . . . WGM11 WGM10*/
+	TCCR1A = 1 << COM1A1 | 1 << WGM11;
+	/* . . . WGM13 WGM12 CS12 CS11 CS10*/
+	TCCR1B = 0b00011101;
+
+	/*TOP value: nb of cycle before OC1A increase*/
+	///////////////////////////////////////////////////////////////////
+
+	bool			button_1 = false;
+	bool			button_2 = false;
+	unsigned int	duty = 10;
+
+	ICR1 = 15625;
 	while (1)
 	{
 		/* PIND: read values on PORT D
@@ -43,6 +45,10 @@ int	main(void)
 		 * 0: low
 		 * 1: high
 		 */
+		if (duty)
+			OCR1A = 156 * duty;
+		else
+			OCR1A = 0;
 		if ((PIND & (1 << PD2)))
 		{
 			button_1 = false;
@@ -51,7 +57,8 @@ int	main(void)
 		{
 			if (button_1 == false)
 			{
-				++count;
+				if (duty < 100)
+					duty += 10;
 				button_1 = true;
 			}
 		}
@@ -64,17 +71,11 @@ int	main(void)
 		{
 			if (button_2 == false)
 			{
-				--count;
+				if (duty != 0)
+					duty -= 10;
 				button_2 = true;
 			}
 		}
-
-		int	led_1 = (count & 0b00000001) ;
-		int	led_2 = (count & 0b00000010) ;
-		int led_3 = (count & 0b00000100) ;
-		int	led_4 = (count & 0b00001000) << 1;
-
-		PORTB = led_1 | led_2 | led_3 | led_4;
 
 		_delay_ms(10);
 	}

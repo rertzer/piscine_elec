@@ -2,7 +2,7 @@ CC := avr-gcc
 
 # mmcu: AVR instruction set architecture
 
-FREQ := 6000000UL
+FREQ := 16000000UL
 
 CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os 
 

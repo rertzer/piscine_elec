@@ -2,16 +2,24 @@ CC := avr-gcc
 
 # mmcu: AVR instruction set architecture
 
-CFLAGS := -mmcu=atmega328p
+FREQ := 6000000UL
 
-FREQ := 16000000UL
+CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os 
 
 SOURCES := main.c
 
+BIN := $(SOURCES:.c=.bin)
+
+DOTHEX := $(SOURCES:.c=.hex)
+
 all : hex flash
 
-hex:
-	$(CC) $(CFLAGS) -DF_CPU=$(FREQ) $(SOURCES) -o main.bin
+hex: $(DOTHEX)
+
+%.bin: %.c
+	$(CC) $(CFLAGS) $(SOURCES) -o main.bin
+
+%.hex: %.bin
 	avr-objcopy -R eeprom -O ihex main.bin main.hex
 
 flash:

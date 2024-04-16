@@ -6,11 +6,20 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/16 12:04:08 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/16 13:46:38 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include <avr/io.h>
 
-int	main()
-{}
+int	main(void)
+{
+	DDRB |= 1 << PB0;
+	PORTB &= ~(1 << PB0);
+
+	while (1)
+	{
+		for (uint32_t i = 0; i < 1300000; ++i);
+		PORTB ^= (1 << PB0);
+	}
+}
