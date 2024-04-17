@@ -13,16 +13,16 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int	main(void)
+int main(void)
 {
 	/* set led as output */
-	DDRB |= (1 << PB1);	
+	DDRB |= (1 << PB1);
 
 	/* TCCR: TIMER/COUNTER CONTROL REGISTER
 	 * COMAx's defines OCx behaviour: OC1A switches on TOP
 	 * WGMx defines which top value to use: 14
 	 * CSx defines the clock prescaler  clkio/1024 */
-	 
+
 	/* COM1A1 COM1A0 . . . . WGM11 WGM10*/
 	TCCR1A = 1 << COM1A1 | 1 << WGM11;
 	/* . . . WGM13 WGM12 CS12 CS11 CS10*/
@@ -31,9 +31,9 @@ int	main(void)
 	/*TOP value: nb of cycle before OC1A increase*/
 	///////////////////////////////////////////////////////////////////
 
-	bool			button_1 = false;
-	bool			button_2 = false;
-	unsigned int	duty = 10;
+	bool button_1 = false;
+	bool button_2 = false;
+	unsigned int duty = 10;
 
 	ICR1 = 15625;
 	while (1)
@@ -45,10 +45,8 @@ int	main(void)
 		 * 0: low
 		 * 1: high
 		 */
-		if (duty)
-			OCR1A = 156 * duty;
-		else
-			OCR1A = 0;
+		OCR1A = 156 * duty;
+
 		if ((PIND & (1 << PD2)))
 		{
 			button_1 = false;
@@ -71,7 +69,7 @@ int	main(void)
 		{
 			if (button_2 == false)
 			{
-				if (duty != 0)
+				if (duty != 10)
 					duty -= 10;
 				button_2 = true;
 			}

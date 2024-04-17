@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/16 14:35:45 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/17 12:06:51 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	main(void)
 	 * CSx defines the clock prescaler  clkio/1024 */
 	 
 	/* COM1A1 COM1A0 . . . . WGM11 WGM10*/
-	TCCR1A = 1 << COM1A0;
+	TCCR1A = 1 << COM1A0 | 1 << WGM11 | 1 << WGM10;
 	/* . . . WGM13 WGM12 CS12 CS11 CS10*/
-	TCCR1B = 0b00001101;
+	TCCR1B = 0b00011101;
 
 	/*TOP value: nb of cycle before OC1A increase*/
-	OCR1A = F_CPU / 1024 -1;
+	OCR1A = F_CPU / 2048;
 
 	while (1)
 	{
