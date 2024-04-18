@@ -21,7 +21,7 @@
  * INT0 falling edge trigger ISC01=1 | ISC00=0 
 */
 
-#define	TIMER1_TOP 100
+#define	TIMER1_TOP 312
 
 int		duty = 1;
 bool	ascending = true;
