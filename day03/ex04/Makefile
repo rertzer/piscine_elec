@@ -6,7 +6,7 @@ FREQ := 16000000UL
 
 CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os 
 
-SOURCES := main.c
+SOURCES := main.c ft_strcmp.c
 
 BIN := $(SOURCES:.c=.bin)
 
@@ -14,13 +14,13 @@ DOTHEX := $(SOURCES:.c=.hex)
 
 all : hex flash
 
-hex: $(DOTHEX)
+hex: main.hex
 
-%.bin: %.c main.h
-	$(CC) $(CFLAGS) $(SOURCES) -o main.bin
-
-%.hex: %.bin
+main.hex: main.bin
 	avr-objcopy -R eeprom -O ihex main.bin main.hex
+
+main.bin: $(SOURCES) main.h
+	$(CC) $(CFLAGS) $(SOURCES) -o main.bin
 
 flash:
 	@killall screen 2> /dev/null || true
