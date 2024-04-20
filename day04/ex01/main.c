@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/19 18:18:00 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/20 11:15:40 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@ int	main(void)
 	uart_init();
 
 	i2c_init();
-	i2c_start();
-	_delay_ms(40);
-	i2c_write(0x71);
-	_delay_ms(40);
-	i2c_start();
-	char data = i2c_read();
-	uart_printstr("data received is: ");
-	uart_print_hex(data);
-	uart_printstr("\r\n");
+	//i2c_start();
+	//_delay_ms(40);
+	//i2c_write(0X38 << 1);
+	trigger_measure();
+	sensor_status();
+	for (int i = 0; i < 6; ++i)
+	{
+		i2c_read();
+		uart_printstr("data received is: ");
+		uart_print_hex(TWDR);
+		uart_printstr("\r\n");
+	}
 	i2c_stop();
 
 	while (true)

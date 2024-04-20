@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/19 17:30:39 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/20 11:17:18 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 #define	START 1
 #define	BAUDO 115200
 
+void	trigger_measure();
+void	sensor_read();
+void	sensor_status();
+void	sensor_register_init(uint8_t);
+void	sensor_start_write();
 void	display_status(uint8_t status);
 
 //I2C
@@ -31,7 +36,7 @@ void	i2c_init();
 void	i2c_start();
 void	i2c_stop();
 void	i2c_write(unsigned char data);
-char	i2c_read();
+void	i2c_read();
 
 // uart
 void	uart_init();

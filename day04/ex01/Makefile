@@ -6,7 +6,7 @@ FREQ := 16000000UL
 
 CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os 
 
-SOURCES := main.c uart.c I2C.c ft_itoa_hex.c
+SOURCES := main.c uart.c I2C.c ft_itoa_hex.c sensor.c
 
 BIN := $(SOURCES:.c=.bin)
 
