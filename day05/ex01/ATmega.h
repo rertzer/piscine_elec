@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/22 10:44:53 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/22 11:17:41 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #define	START 1
 #define	BAUDO 115200
 
+void	zeros(unsigned int address, unsigned int size);
 
 //eeprom
 unsigned char	eeprom_read(unsigned int address);

@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/18 13:01:33 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/19 10:43:25 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,3 @@ char	uart_rx()
 	while (! (UCSR0A & (1 << RXC0)));
 	return UDR0;
 }	
-
-void	uart_print(char *str)
-{
-	while (*str != '\0')
-	{
-		uart_tx(*str);
-		++str;
-	}
-}

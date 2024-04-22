@@ -1,59 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   uart.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/19 10:38:42 by rertzer          ###   ########.fr       */
+/*   Created: 2024/04/19 13:34:28 by rertzer           #+#    #+#             */
+/*   Updated: 2024/04/22 17:46:45 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
-
-int	main(void)
-{
-	timer1_init();
-	uart_init();
-
-	// set general interrupts
-	sei();
-
-	while (true)
-	{
-	}
-	return 0;
-}
-
-void	timer1_init()
-{
-	/*timer 1 settings  mode 15*/
-	TCCR1A =  1 << WGM11 | 1 << WGM10;
-	// clock divided by 1024
-	TCCR1B = 0b00011101;
-	TIMSK1 |= (1 << TOIE1);
-	/*frequency 0.5 Hz */
-	OCR1A = F_CPU / 1024 * 2;
-}
+#include "ATmega.h"
 
 void	uart_init()
 {
 	// USART Baud Rate Register
 	UBRR0 = (F_CPU + 8 * BAUDO) / 16 / BAUDO - 1;
 
-	// define async 8N1 
-	//UCSR0C = 0b00000011;
-	// USART transmitter enable
-	UCSR0B |= (1 << TXEN0);
+	// USART transmitter, receiver and receiver interrupt enable
+	UCSR0B |= (1 << TXEN0) | (1 << RXEN0) | (1 << RXCIE0);
 }
 
+char	uart_rx()
+{
+	//waiting for data
+	while (! (UCSR0A & (1 << RXC0)));
+	return UDR0;
+}
 void	uart_tx(char c)
 {
 	//waiting for transmit buffer to be empty
 	while (! (UCSR0A & (1 << UDRE0)));
 	UDR0 = c;
-}	
+}
 
 void	uart_printstr(char *str)
 {
@@ -64,8 +43,31 @@ void	uart_printstr(char *str)
 	}
 }
 
-// timer0 interrupt handling
-ISR(TIMER1_OVF_vect)
+void	uart_readline(char	*buffer, uint16_t size)
 {
-	uart_printstr("Hello World!\r\n");
+	for (uint16_t i = 0; i < size - 1; ++i)
+	{
+		char	current = uart_rx();
+		if (current == '\n')
+		{
+			buffer[i] = '\0';
+			return;
+		}
+		buffer[i] = current;
+	}
+	buffer[size - 1] = '\0';
+	return;
+}
+
+void	uart_print_hex(uint8_t value)
+{
+	char	hex_nb[3];
+	ft_itoa_hex(value, hex_nb);
+	uart_printstr(hex_nb);
+}
+
+ISR(USART_RX_vect)
+{
+	char c = UDR0;
+	uart_tx(c);
 }

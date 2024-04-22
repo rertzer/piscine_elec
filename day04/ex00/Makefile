@@ -4,9 +4,9 @@ CC := avr-gcc
 
 FREQ := 16000000UL
 
-CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os -lm 
+CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os 
 
-SOURCES := main.c uart.c ft_itoa_hex.c eeprom.c
+SOURCES := main.c uart.c I2C.c ft_itoa_hex.c
 
 BIN := $(SOURCES:.c=.bin)
 

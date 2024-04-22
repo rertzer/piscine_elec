@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/18 11:30:13 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/19 10:35:13 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ int	main(void)
 void	uart_init()
 {
 	// USART Baud Rate Register
-	UBRR0 = 8;//(F_CPU + 8 * BAUDO) / 16 / BAUDO - 1;
+	UBRR0 = (F_CPU + 8 * BAUDO) / 16 / BAUDO - 1;
 
 	// define async 8N1 
 	//UCSR0C = 0b00000011;
 	// USART transmitter enable
-	UCSR0B |= (1 << TXEN0);// | (1 << RXEN0);
-
+	UCSR0B |= (1 << TXEN0);
 }
 
 void	uart_tx(char c)

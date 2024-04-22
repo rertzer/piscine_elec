@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:31:00 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/20 15:55:38 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/22 09:36:26 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(void)
 			uart_printstr(str_ref);
 
 			//print humidity
-			str_ref = dtostrf(humidity, 4, 1, str_value);
+			str_ref = dtostrf(humidity, 4, 0, str_value);
 			uart_printstr("°C, Humidity: ");
 			uart_printstr(str_ref);
 			uart_printstr("%\r\n");
