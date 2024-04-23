@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:39:06 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/22 17:42:20 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/23 09:48:16 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,16 @@ bool	eepromalloc_free(uint16_t id)
 	return true;
 }
 
+uint16_t	eeprom_find_next_address(uint16_t address)
+{
+	if (address >= 1020)
+		return 0x00;
+	uint16_t	value;
+	if (eeprom_buffer_read((void*)&value, address + 2, 2) == false)
+			return 0x00;
+	return address + 4 + value;
+}
+
 uint16_t	eeprom_find_id(uint16_t id)
 {
 	uint16_t	address = 0x01;
@@ -156,7 +166,7 @@ uint16_t	eeprom_find_empty(uint16_t length)
 bool	eeprom_buffer_read(void *buffer, uint16_t offset, uint16_t length)
 {
 	char	*char_buffer = (char*)buffer;
-	if (length < 1 || length > 1023)
+	if (offset < 1 || offset + length > 1023)
 		return false;
 	for (uint16_t i = 0; i < length; ++i)
 	{
@@ -174,6 +184,7 @@ bool	eeprom_buffer_write(void *buffer, uint16_t offset, uint16_t length)
 	{
 		eeprom_write(offset + i, buffer[i]);
 	}
+	buffer[i] = '\0';
 	return true;
 }
 
