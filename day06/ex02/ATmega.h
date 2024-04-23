@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/23 13:22:41 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/23 11:19:31 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 #define	BAUDO	115200
 #define	TIMER1_TOP 312
 
-#define	RED		(1<<PD5)
-#define	GREEN	(1<<PD6)
-#define	BLUE	(1<<PD3)
+#define	RED		(1<<PD3)
+#define	GREEN	(1<<PD5)
+#define	BLUE	(1<<PD6)
 
 // uart
 void	uart_init();
