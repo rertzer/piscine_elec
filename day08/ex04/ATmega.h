@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/25 12:06:57 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/25 13:27:37 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	uart_tx(char c);
 void	uart_print(char *str);
 
 uint8_t	ft_strlen(const char *s);
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_itoa_hex(uint16_t nb, char *buffer);
 void	ft_itoa_dec(uint16_t nb, char *buffer);
 #endif
