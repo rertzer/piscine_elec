@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/26 09:16:14 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/26 11:15:02 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,16 @@
 #define	BLUE	(1<<PD6)
 
 #define	LED_FRAME_SIZE	20
-uint8_t	color_value(uint8_t x);
-uint8_t	read_color(uint8_t msb, uint8_t lsb);
-void	set_colors(char *color, uint8_t *rgb);
 
+void	display_status(uint8_t status);
+
+//I2C
+void	i2c_init();
+void	i2c_start();
+void	i2c_stop();
+void	i2c_write(unsigned char value);
+void	i2c_read();
+void	i2c_last_read();
 
 //SPI
 void	spi_init();
