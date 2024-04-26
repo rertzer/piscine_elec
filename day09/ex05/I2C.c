@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 13:42:06 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/26 15:27:59 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/26 15:45:10 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	i2c_init()
 {
+	// set frequency
 	// freq = F_CPU / (16 + 2 . TWBR . Prescale)
 	TWBR = 72;
 	
@@ -43,5 +44,11 @@ void	i2c_write(unsigned char data)
 void	i2c_read()
 {
 	TWCR = (1<<TWINT) | (1<<TWEN) | (1<<TWEA);
+	while (! (TWCR & (1<<TWINT)));
+}
+
+void	i2c_last_read()
+{
+	TWCR = (1<<TWINT) | (1<<TWEN) | (0<<TWEA);
 	while (! (TWCR & (1<<TWINT)));
 }

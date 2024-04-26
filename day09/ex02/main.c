@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:46:58 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/26 12:16:37 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/26 12:52:42 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	main(void)
 	i2c_stop();
 	
 	
-	while (1)
-	{
 	
 		i2c_start();
 		i2c_write(39 << 1);
@@ -48,6 +46,8 @@ int	main(void)
 		i2c_write(0b01011011);
 		i2c_stop();
 
+	while (1)
+	{
 		_delay_ms(100);
 
 	}
