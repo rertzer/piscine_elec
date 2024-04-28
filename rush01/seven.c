@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 09:25:48 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 12:15:46 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 14:23:36 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	write_digit(uint8_t digit, uint8_t pos)
 	digits[9] = 0b01101111;
 	digits[10] = 0b11111111;
 	digits[11] = 0b01000000;
-
 	i2c_start();
 	i2c_write(39 << 1);
 	i2c_write(0x02);

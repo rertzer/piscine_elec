@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:46:58 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 09:54:31 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 15:07:47 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,16 @@ void	exec_mode()
 	(*func[mode])();
 }
 
+
+void	delay_mode(int max)
+{
+	for (int i = 0; i < max; ++i)
+	{
+		exec_mode();
+		_delay_ms(1);
+	}
+}
+
 int	main(void)
 {
 	uint16_t	counter = 0;
@@ -93,9 +103,10 @@ int	main(void)
 	init_mode();
 	while (1)
 	{
+		cli();
 		led_switches();
 		exec_mode();
-		_delay_ms(10);
+		sei();
 	}
 
 }

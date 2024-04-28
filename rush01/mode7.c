@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 09:17:14 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 09:42:30 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 15:48:46 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include "ATmega.h"
 
 void	init_mode7()
-{}
+{
+	value = 0;
+}
 
 void	mode7()
 {
-
+	write_number(value);
 }

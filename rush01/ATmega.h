@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 12:21:42 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 15:51:22 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ void	init_sequence();
 void	init_mode();
 void	exec_mode();
 void	display_status(uint8_t status);
+void	delay_mode(int max);
 
 //timer 1
 void	set_timer1();
 void	flash_tricolor();
 void	read_sensor(uint32_t *buffer);
-void	take_temperature();
+float	read_temperature();
+void	take_celsius();
+void	take_farenheit();
 void	take_humidity();
 
 //switches
