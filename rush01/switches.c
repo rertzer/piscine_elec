@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 11:03:48 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/27 11:58:43 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 09:30:00 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ void	led_switches()
 		led |= 8;
 		if (sw1_pushed == false)
 		{
-			if (mode < 10)
+			if (mode == 4)
+				mode = 6;
+			else if (mode < 11)
 				++mode;
 			sw1_pushed = true;
+			init_mode();
 		}
 	}
 				
@@ -54,9 +57,12 @@ void	led_switches()
 		led |= 4;
 		if (sw2_pushed == false)
 		{
-			if (mode > 0)
+			if (mode == 6)
+				mode = 4;
+			else if (mode > 0)
 				--mode;
 			sw2_pushed = true;
+			init_mode();
 		}
 	}
 

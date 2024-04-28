@@ -11,7 +11,7 @@ SOURCES := main.c \
 		   switches.c \
 		   ft_itoa_dec.c ft_itoa_hex.c split_number.c \
 		   mode0.c mode1.c mode2.c mode3.c mode4.c mode5.c mode6.c \
-		   mode7.c mode8.c mode9.c mode10.c
+		   mode7.c mode8.c mode9.c mode10.c mode11.c
 BIN := $(SOURCES:.c=.bin)
 
 DOTHEX := $(SOURCES:.c=.hex)

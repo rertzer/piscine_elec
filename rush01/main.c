@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:46:58 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/27 11:55:45 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 09:54:31 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,47 @@ void	init_sequence()
 	_delay_ms(1000);
 }
 
+void	init_mode()
+{
+	void(*func[12])(void) = 
+	{
+		init_mode0,
+		init_mode1,
+		init_mode2,
+		init_mode3,
+		init_mode4,
+		init_mode5,
+		init_mode6,
+		init_mode7,
+		init_mode8,
+		init_mode9,
+		init_mode10,
+		init_mode11,
+	};
+	(*func[mode])();
+
+}
+
+
+void	exec_mode()
+{
+	void(*func[12])(void) = 
+	{
+		mode0,
+		mode1,
+		mode2,
+		mode3,
+		mode4,
+		mode5,
+		mode6,
+		mode7,
+		mode8,
+		mode9,
+		mode10,
+		mode11,
+	};
+	(*func[mode])();
+}
 
 int	main(void)
 {
@@ -49,9 +90,11 @@ int	main(void)
 	init_sequence();
 	init_switches();
 	mode = 0;
+	init_mode();
 	while (1)
 	{
 		led_switches();
+		exec_mode();
 		_delay_ms(10);
 	}
 

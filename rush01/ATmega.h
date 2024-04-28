@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/27 11:29:26 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 12:21:42 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,27 @@
 #define	BAUDO	115200
 #define	TIMER1_TOP 312
 
-#define	RED		(1<<PD3)
-#define	GREEN	(1<<PD5)
-#define	BLUE	(1<<PD6)
+#define	RED		(1<<PD5)
+#define	GREEN	(1<<PD6)
+#define	BLUE	(1<<PD3)
 
 #define	LED_FRAME_SIZE	20
 
 volatile uint8_t	mode;
-volatile bool	top;
+volatile bool		top;
+volatile uint16_t	value;
 
-
+void	init_sequence();
+void	init_mode();
+void	exec_mode();
 void	display_status(uint8_t status);
-
 
 //timer 1
 void	set_timer1();
+void	flash_tricolor();
+void	read_sensor(uint32_t *buffer);
+void	take_temperature();
+void	take_humidity();
 
 //switches
 void	init_switches();
@@ -47,10 +53,36 @@ bool	read_button_sw3();
 
 // 7 segments
 void	init_7segments();
+void	write_number(uint16_t nb);
 void	write_digit(uint8_t digit, uint8_t pos);
+void	write_ft();
 
-// mode 0
+// modes
+void	init_mode0();
+void	init_mode1();
+void	init_mode2();
+void	init_mode3();
+void	init_mode4();
+void	init_mode5();
+void	init_mode6();
+void	init_mode7();
+void	init_mode8();
+void	init_mode9();
+void	init_mode10();
+void	init_mode11();
+
 void	mode0();
+void	mode1();
+void	mode2();
+void	mode3();
+void	mode4();
+void	mode5();
+void	mode6();
+void	mode7();
+void	mode8();
+void	mode9();
+void	mode10();
+void	mode11();
 
 //I2C
 void	i2c_init();
@@ -64,8 +96,11 @@ void	i2c_last_read();
 void	spi_init();
 void	spi_transmit(uint8_t data);
 void	spi_transmit_buffer(uint8_t *buffer, uint16_t size);
+void	spi_led_color(uint8_t led, uint8_t r, uint8_t g, uint8_t b);
+void	spi_led_tricolor(uint8_t r, uint8_t g, uint8_t b);
 
 //adc
+void		adc_display_channel(uint8_t channel);
 uint16_t	adc_read_channel(uint8_t channel);
 
 //uart
