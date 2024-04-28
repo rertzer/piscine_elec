@@ -24,6 +24,7 @@ main.bin: $(SOURCES) ATmega.h
 flash:
 	@killall screen 2> /dev/null || true
 	avrdude -c arduino -b 115200 -p atmega328p -P /dev/ttyUSB0 -U flash:w:main.hex
+	gnome-terminal -- screen /dev/ttyUSB0 115200
 
 clean:
 	rm -f main.bin main.hex

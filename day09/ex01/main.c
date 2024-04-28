@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:46:58 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/26 11:57:30 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 18:17:30 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ int	main(void)
 				button = true;
 			}
 		}
-		if (button)
-			uart_printstr("pushed\r\n");
-		else
-			uart_printstr("not pushed\r\n");
-		uart_printstr("counter is: ");
-		uart_print_dec(counter);
-		uart_printstr("\r\n");
 		i2c_start();
 		i2c_write(39 << 1);
 		i2c_write(0x02);

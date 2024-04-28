@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 09:46:58 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/26 13:08:17 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 18:29:30 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(void)
 	i2c_write(39 << 1);
 	//command register 0
 	i2c_write(0x06);
-	i2c_write(0b01111111);
+	i2c_write(0b00001111);
 	i2c_write(0b00000000);
 	i2c_stop();
 	
@@ -55,7 +55,7 @@ int	main(void)
 		i2c_start();
 		i2c_write(39 << 1);
 		i2c_write(0x02);
-		i2c_write(0b01111111);
+		i2c_write(0b10001111);
 		i2c_write(digits[counter]);
 		i2c_stop();
 		++counter;
