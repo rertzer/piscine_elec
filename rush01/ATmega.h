@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:17:42 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 15:51:22 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 17:23:36 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ float	read_temperature();
 void	take_celsius();
 void	take_farenheit();
 void	take_humidity();
+
+//rtc
+void	set_time();
 
 //switches
 void	init_switches();
@@ -114,6 +117,9 @@ void	uart_printstr(char *str);
 void	uart_print_hex(uint8_t value);
 void	uart_print_dec(uint16_t value);
 
+//uart prompt
+void	readline(uint8_t *buffer);
+
 //sensor
 void	trigger_measure();
 void	sensor_read();
@@ -124,6 +130,7 @@ void	sensor_status();
 //
 void	ft_itoa_hex(uint16_t nb, char *buffer);
 void	ft_itoa_dec(uint16_t nb, char *buffer);
+uint8_t	ft_strlen(const char *s);
 void	split_number(uint16_t nb, uint8_t *buffer);
 #endif
 

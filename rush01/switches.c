@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 11:03:48 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 13:17:38 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/04/28 16:55:39 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	led_switches()
 {
 	static	bool	sw1_pushed = false;
 	static	bool	sw2_pushed = false;
+	static	bool	sw3_pushed = false;
 	uint8_t	led = 0;
 
 
@@ -68,8 +69,19 @@ void	led_switches()
 	}
 
 	//SW3 pushed => LED11 on
-	if (read_button_sw3())
+	if (! read_button_sw3())
+	{
+		sw3_pushed = false;
+	}
+	else
+	{
 		led |= 2;
+		if (sw3_pushed == false)
+		{
+			set_time();
+			sw3_pushed = true;
+		}
+	}
 	expander_led(led);
 }
 

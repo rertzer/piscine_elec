@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mode5.c                                            :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 09:17:01 by rertzer           #+#    #+#             */
-/*   Updated: 2024/04/28 16:56:01 by rertzer          ###   ########.fr       */
+/*   Created: 2022/11/07 14:19:35 by rertzer           #+#    #+#             */
+/*   Updated: 2024/04/23 14:17:16 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 
-#include "ATmega.h"
-
-void	init_mode5()
-{}
-
-void	mode5()
+uint8_t	ft_strlen(const char *s)
 {
+	uint8_t	i;
 
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

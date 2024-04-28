@@ -8,7 +8,8 @@ CFLAGS := -mmcu=atmega328p -DF_CPU=$(FREQ) -Os -lm
 
 SOURCES := main.c \
 		   timer1.c I2C.c  uart.c sensor.c seven.c  spi.c adc.c \
-		   switches.c \
+		   switches.c rtc.c uart_prompt.c\
+		   ft_strlen.c \
 		   ft_itoa_dec.c ft_itoa_hex.c split_number.c \
 		   mode0.c mode1.c mode2.c mode3.c mode4.c mode5.c mode6.c \
 		   mode7.c mode8.c mode9.c mode10.c mode11.c
